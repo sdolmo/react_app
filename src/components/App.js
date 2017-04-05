@@ -42,9 +42,11 @@ class App extends React.Component {
         <div className="menu">
           <Header tagline="Fresh Seafood Market" />
           <ul className="list-of-fishes">
+            {/* we can't map over the fish object so... */}
             {
               Object
-                .keys(this.state.fishes)
+                .keys(this.state.fishes) // ...use keys method to get an array of keys
+                // map over them and set each list values key to the object key and send the details of a specific fish to the Fish component
                 .map(key => <Fish key={key} details={this.state.fishes[key]} />)
             }
           </ul>
