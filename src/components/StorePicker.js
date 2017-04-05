@@ -15,8 +15,10 @@ class StorePicker extends React.Component {
   goToStore(e) {
     e.preventDefault();
     // first grab the text from the form
-    console.log(this.storeInput.value);
-    // second we're going to transition from / to /store/:storeId      
+    const storeId = this.storeInput.value;
+    console.log(`Going to ${storeId}`);
+    // second we're going to transition from / to /store/:storeId
+    this.context.router.history.push(`/store/${storeId}`);
   }
 
 
@@ -34,6 +36,11 @@ class StorePicker extends React.Component {
       </form>
     )
   }
+}
+
+// This tells react router that this class (StorePicker) expects an element called 'router'
+StorePicker.contextTypes = {
+  router: React.PropTypes.object
 }
 
 export default StorePicker;
