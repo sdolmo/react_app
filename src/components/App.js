@@ -4,6 +4,28 @@ import Order from './Order';
 import Inventory from './Inventory';
 
 class App extends React.Component {
+  constructor() {
+    super(); // Must initialize super function to use 'this'
+    // get the initial state
+    this.state = {
+      fishes: {},
+      order: {}
+    };
+
+    this.addFish = this.addFish.bind(this);
+  }
+
+  addFish(fish) {
+    // update our state
+    // make a copy of existing state
+    const fishes = {...this.state.fishes}
+    // add in our new fish
+    const timestamp = Date.now(); // unique id
+    fishes[`fish-${timestamp}`] = fish
+    // set state
+    this.setState({ fishes }) // ES6 way
+  }
+
   render() {
     return (
       <div className="catch-of-the-day">
@@ -11,7 +33,7 @@ class App extends React.Component {
           <Header tagline="Fresh Seafood Market" />
         </div>
         <Order />
-        <Inventory />
+        <Inventory addFish={this.addFish}/>
       </div>
     )
   }
