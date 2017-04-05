@@ -17,9 +17,11 @@ class App extends React.Component {
 
     // binding methods
     this.addFish = this.addFish.bind(this);
+    this.removeFish = this.removeFish.bind(this);
     this.updateFish = this.updateFish.bind(this);
     this.loadSamples = this.loadSamples.bind(this);
     this.addToOrder = this.addToOrder.bind(this);
+    this.removeFromOrder = this.removeFromOrder.bind(this);
   }
 
   componentWillMount() {
@@ -67,6 +69,13 @@ updateFish(key, updateFish) {
   this.setState({ fishes });
 }
 
+removeFish(key) {
+  const fishes = {...this.state.fishes};
+  // use null instead of delete because of firebase**
+  fishes[key] = null;
+  this.setState({ fishes });
+}
+
   loadSamples() {
     this.setState({
       fishes : sampleFishes
@@ -79,6 +88,15 @@ updateFish(key, updateFish) {
     // update or add the new number of fish order
     order[key] = order[key] + 1 || 1;
     // update state
+    this.setState({ order });
+  }
+
+  removeFromOrder(key) {
+    // copy order state
+    const order = {...this.state.order};
+    // use JS delete operator to remove item from order object
+    delete order[key];
+    // update order state
     this.setState({ order });
   }
 
@@ -97,12 +115,19 @@ updateFish(key, updateFish) {
             }
           </ul>
         </div>
-        <Order fishes={this.state.fishes} order={this.state.order} params={this.props.match.params}/>
+        <Order
+          fishes={this.state.fishes}
+          order={this.state.order}
+          params={this.props.match.params}
+          removeFromOrder={this.removeFromOrder}
+        />
         <Inventory
           addFish={this.addFish}
           loadSamples={this.loadSamples}
           fishes={this.state.fishes}
-          updateFish={this.updateFish}/>
+          updateFish={this.updateFish}
+          removeFish={this.removeFish}
+        />
       </div>
     )
   }
