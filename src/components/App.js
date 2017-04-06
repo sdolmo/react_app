@@ -26,13 +26,13 @@ class App extends React.Component {
 
   componentWillMount() {
     // this runs right before the app is rendered
-    this.ref = base.syncState(`${this.props.location.pathname}/fishes`
-      , {
+    this.ref = base.syncState(`${this.props.match.params.storeId}/fishes`,
+       {
         context: this,
         state: 'fishes'
       });
 
-      // check if there is any order in localStorage
+      // check if there is any orders in localStorage
       const localStorageRef = localStorage.getItem(`order-${this.props.match.params.storeId}`);
 
       if(localStorageRef) {
@@ -131,6 +131,11 @@ removeFish(key) {
       </div>
     )
   }
+}
+
+
+App.propTypes = {
+  match: React.PropTypes.object.isRequired
 }
 
 export default App;

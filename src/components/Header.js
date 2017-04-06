@@ -16,4 +16,9 @@ const Header = (props) => {
   )
 }
 
+// Add PropTypes to typechack the props in a component
+Header.propTypes = {
+  tagline: React.PropTypes.string.isRequired
+}
+
 export default Header;
