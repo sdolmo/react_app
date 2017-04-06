@@ -127,6 +127,7 @@ removeFish(key) {
           fishes={this.state.fishes}
           updateFish={this.updateFish}
           removeFish={this.removeFish}
+          storeId={this.props.match.params.storeId}
         />
       </div>
     )
