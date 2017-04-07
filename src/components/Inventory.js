@@ -143,7 +143,7 @@ class Inventory extends React.Component {
 
   // Bring the proptypes into the component with the keyword 'static' to prevent inventory from
   // creating new proptypes everytime the component is created
-  Inventory.propTypes = {
+  static propTypes = {
     addFish: React.PropTypes.func.isRequired,
     fishes: React.PropTypes.object.isRequired,
     loadSamples: React.PropTypes.func.isRequired,
