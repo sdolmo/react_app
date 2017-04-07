@@ -9,20 +9,21 @@ import base from '../base';
 class App extends React.Component {
   constructor() {
     super(); // Must initialize super function to use 'this'
-    // get the initial state
-    this.state = {
-      fishes: {},
-      order: {}
-    };
 
     // binding methods
     this.addFish = this.addFish.bind(this);
-    this.removeFish = this.removeFish.bind(this);
+    // this.removeFish = this.removeFish.bind(this);
     this.updateFish = this.updateFish.bind(this);
-    this.loadSamples = this.loadSamples.bind(this);
+    // this.loadSamples = this.loadSamples.bind(this);
     this.addToOrder = this.addToOrder.bind(this);
     this.removeFromOrder = this.removeFromOrder.bind(this);
   }
+
+  // Adding the state property to the a property initialize aka every instance of App component
+  state = {
+    fishes: {},
+    order: {}
+  };
 
   componentWillMount() {
     // this runs right before the app is rendered
@@ -63,24 +64,25 @@ class App extends React.Component {
     this.setState({ fishes }) // ES6 way
   }
 
-updateFish(key, updateFish) {
-  const fishes = {...this.state.fishes};
-  fishes[key] = updateFish;
-  this.setState({ fishes });
-}
+  updateFish(key, updateFish) {
+    const fishes = {...this.state.fishes};
+    fishes[key] = updateFish;
+    this.setState({ fishes });
+  }
 
-removeFish(key) {
-  const fishes = {...this.state.fishes};
-  // use null instead of delete because of firebase**
-  fishes[key] = null;
-  this.setState({ fishes });
-}
+  removeFish(key) {
+    const fishes = {...this.state.fishes};
+    // use null instead of delete because of firebase**
+    fishes[key] = null;
+    this.setState({ fishes });
+  }
 
-  loadSamples() {
+  // Prototype initializers using ES6 make the parent of the function the 'this' value
+  loadSamples = () => {
     this.setState({
       fishes : sampleFishes
     })
-  }
+  };
 
   addToOrder(key) {
     // copy of order store
