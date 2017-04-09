@@ -1,5 +1,6 @@
 import React from 'react';
 
+// This is a stateless functional component
 const Header = (props) => {
   return (
     <header className="top">
